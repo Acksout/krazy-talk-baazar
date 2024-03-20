@@ -52,7 +52,7 @@ function SignupPage() {
             try {
 
                 const response = await axios.post(
-                    "http://localhost:8080/api/checkusername",
+                    "http://localhost:8080/apiauth/checkusername",
                     {
                         username,
                     }
@@ -62,7 +62,7 @@ function SignupPage() {
                     setErrors(newErrors);
                 } else {
 
-                    await axios.post("http://localhost:8080/api/signup", {
+                    await axios.post("http://localhost:8080/apiauth/signup", {
                         username,
                         password,
                     });

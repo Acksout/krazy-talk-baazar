@@ -41,7 +41,7 @@ app.use(express.json());
 // Apply the allowCors middleware to your routes
 app.use(allowCors);
 
-app.get("/api/test", async (req, res) => {
+app.get("/apimsg/test", async (req, res) => {
     try {
         await mongoose.connection.db.admin().ping();
         res.status(200).json({ message: "Database connection is working" });
@@ -50,7 +50,7 @@ app.get("/api/test", async (req, res) => {
     }
 });
 
-app.post("/api/messages", async (req, res) => {
+app.post("/apimsg/messages", async (req, res) => {
     const { user, message, roomName } = req.body;
     try {
         const newMessage = new Message({ user, message, roomName });

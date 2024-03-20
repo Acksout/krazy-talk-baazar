@@ -52,7 +52,7 @@ function ChatRoomPage() {
 
     const fetchMessages = () => {
         axios
-            .get(`http://localhost:5020/api/messages/${roomName}`)
+            .get(`http://localhost:5020/apimsg/messages/${roomName}`)
             .then((response) => {
                 if (Array.isArray(response.data)) {
                     setMessages(response.data);
@@ -70,7 +70,7 @@ function ChatRoomPage() {
 
     const sendMessage = () => {
         axios
-            .post("http://localhost:5020/api/messages", {user: username, message: newMessage, roomName: roomName})
+            .post("http://localhost:5020/apimsg/messages", {user: username, message: newMessage, roomName: roomName})
             .then(() => {
                 fetchMessages();
             })

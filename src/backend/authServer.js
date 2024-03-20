@@ -43,7 +43,7 @@ const connectDB = async () => {
 
 connectDB().catch(console.error);
 
-app.post("/api/checkusername", async (req, res) => {
+app.post("/apiauth/checkusername", async (req, res) => {
     const { username } = req.body;
 
     try {
