@@ -20,48 +20,54 @@ const connectDB = async () => {
 
 connectDB();
 
+// Allow CORS middleware function
+const allowCors = (fn) => async (req, res) => {
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+        res.status(200).end()
+        return
+    }
+    return await fn(req, res)
+};
 
 app.use(express.json());
 
-// Enable CORS
-const allowedOrigins = ['http://localhost:8080'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+// Apply the allowCors middleware to your routes
+app.use(allowCors);
 
 app.get("/api/test", async (req, res) => {
     try {
         await mongoose.connection.db.admin().ping();
-        res.status(200).json({message: "Database connection is working"});
+        res.status(200).json({ message: "Database connection is working" });
     } catch (error) {
-        res.status(500).json({error: "Database connection error", message: error.message});
+        res.status(500).json({ error: "Database connection error", message: error.message });
     }
 });
 
 app.post("/api/messages", async (req, res) => {
-    const {user, message, roomName} = req.body;
+    const { user, message, roomName } = req.body;
     try {
-        const newMessage = new Message({user, message, roomName});
+        const newMessage = new Message({ user, message, roomName });
         await newMessage.save();
         res.status(201).json(newMessage);
     } catch (error) {
-        res.status(500).json({error: "Error saving message", message: error.message});
+        res.status(500).json({ error: "Error saving message", message: error.message });
     }
 });
 
 app.get("/api/messages/:roomName", async (req, res) => {
-    const {roomName} = req.params;
+    const { roomName } = req.params;
     try {
-        const messages = await Message.find({roomName});
+        const messages = await Message.find({ roomName });
         res.json(messages);
     } catch (error) {
-        res.status(500).json({error: "Error retrieving messages", message: error.message});
+        res.status(500).json({ error: "Error retrieving messages", message: error.message });
     }
 });
 
