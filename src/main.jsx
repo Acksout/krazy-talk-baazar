@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import SignupPage from "./pages/SignupPage.jsx";
-import SigninPage from "./pages/SigninPage.jsx";
-import MainChatPage from "./pages/MainChatPage.jsx";
-import ChatRoomPage from "./pages/ChatRoomPage.jsx";
+import SignupPage from "./frontend/pages/SignupPage.jsx";
+import SigninPage from "./frontend/pages/SigninPage.jsx";
+import MainChatPage from "./frontend/pages/MainChatPage.jsx";
+import ChatRoomPage from "./frontend/pages/ChatRoomPage.jsx";
 import {disableReactDevTools} from "@fvilers/disable-react-devtools";
 import dotenv from "dotenv";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./frontend/pages/LandingPage.jsx";
 // import SignupPage from "./pages/SignupPage";
 // import SigninPage from "./pages/SigninPage";
 // import MainChatPage from "./pages/MainChatPage";
